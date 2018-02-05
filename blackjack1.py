@@ -1,16 +1,26 @@
 import random
 
 
-
 def deal_value():
     bet_value = 0
     while bet_value < 300:
         bet_value_temp = input('Enter you betting amount: 5, 10, 20, 50, 100 or "deal"\n')
+
         if bet_value_temp == "deal":
-            break
+            if bet_value == 0:
+                print("Minimum betting amount is 5")
+            else:
+                break
+
         elif bet_value_temp == '5' or bet_value_temp == '10' or bet_value_temp == '20' or bet_value_temp == '50' or bet_value_temp == '100':
             bet_value = bet_value + int(bet_value_temp)
-            print('Your betting amount is:', bet_value, "Press 'deal' to finalize this amount!")
+
+            if bet_value > 300:
+                print("Sorry, your betting amount can't exceed 300")
+                bet_value = bet_value - int(bet_value_temp)
+            else:
+                print('Your betting amount is:', bet_value, ", Press 'deal' to finalize this amount!")
+
         else:
             print("Please give a valid input!!!")
     print('Your final betting amount is:', bet_value)
@@ -18,8 +28,8 @@ def deal_value():
 
 def distribution1():
     sum = 0
-    player_cards.append(random.randint(2, 11))
-    player_cards.append(random.randint(2, 11))
+    player_cards.append(random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]))
+    player_cards.append(random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]))
     print("Your cards are:", player_cards)
     if player_cards[0] == 11 and player_cards[1] == 11:
         print("value of first card changes to 1 from 11")
@@ -33,12 +43,12 @@ def distribution1():
 
 def hit(sum):
     #game_on = True
-    while True:
-        player_cards.append(random.randint(1, 11))
+    #while True:
+        player_cards.append(random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]))
         print(player_cards)
         for i in player_cards[(len(player_cards)-1):]:
             sum = sum + i
-        if sum > 21:  # changing here
+        if sum > 21:
             for i in range(len(player_cards)):
                 if player_cards[i] == 11:
                     player_cards[i] = 1
@@ -69,6 +79,11 @@ def stand(d_value, sum):
     elif sum > d_value:
         print("Dealer's value is:", d_value)
         print('You Win')
+
+
+def wallet():
+    balance = 1000
+
 
 
 # ---------------------------------- Game Starts Here -----------------------------------------
